@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:property-placeholder location="classpath:config.properties"/>   
+    
+    <bean id="deviceAccountResource"
+        class="com.babeeta.hudee.service.account.controller.DeviceAccountResource"
+        scope="singleton" lazy-init="false">
+        <property name="deviceAccountService" ref="deviceAccountService" />
+    </bean>
+
+    <bean id="deviceAccountService"
+        class="com.babeeta.hudee.service.account.service.impl.DeviceAccountServiceImpl"
+        scope="singleton" lazy-init="false">
+        <property name="deviceAccountDao" ref="deviceAccountDao" />
+    </bean>
+
+    <bean id="deviceAccountDao"
+        class="com.babeeta.hudee.service.account.dao.impl.DeviceAccountDaoImpl"
+        scope="singleton" lazy-init="false">
+        <constructor-arg type="String" value="${mongo-host}" />
+        <constructor-arg type="int" value="${mongo-port}" />
+        <constructor-arg type="String" value="${db-name}" />
+    </bean>
+
+    <bean id="exporter" class="org.springframework.jmx.export.MBeanExporter"
+        lazy-init="false">
+        <property name="beans">
+            <map>
+                <entry key="com.babeeta.hudee.service.account.monitor:name=DeviceAccountJMX" value-ref="deviceAccountJMX" />
+            </map>
+        </property>
+    </bean>
+    
+    <bean id="deviceAccountJMX"
+          class="com.babeeta.hudee.service.account.monitor.DeviceAccountJMX"
+          lazy-init="false" >
+    </bean>
+</beans>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+    <context:property-placeholder location="classpath:config.properties"/>  
+
+	<bean id="appGatewayResource" 
+          class="com.babeeta.hudee.gateway.app.controller.AppGatewayResource" 
+          scope="singleton"
+          lazy-init="false">
+        <constructor-arg type="int" value="${gateway.maxContentSize}" />
+        <constructor-arg type="int" value="${gateway.maxMessageLife}" />
+        <constructor-arg type="int" value="${gateway.pageSize}" />
+        
+        <property name="messageService" ref="messageService"/>
+        <property name="subscriptionService" ref="subscriptionService"/>
+        <property name="shardingService" ref="shardingService"/>        
+	</bean>
+    
+    <bean id="authInterceptor" 
+          class="com.babeeta.hudee.gateway.app.controller.AuthInterceptor" 
+          scope="singleton"
+          lazy-init="false">
+        <property name="accountService" ref="accountService"/>
+    </bean>
+    
+	<bean id="accountService" 
+          class="com.babeeta.hudee.gateway.app.service.AccountService" 
+          scope="singleton"
+          lazy-init="false">
+        <constructor-arg type="int" value="${acocunt-app-max-connection}" />
+        <constructor-arg type="String" value="${account-app-domain}"/>
+        <constructor-arg type="String" value="${superUser.username}"/>
+        <constructor-arg type="String" value="${superUser.password}"/>                  
+	</bean>
+    
+    <bean id="messageService" 
+          class="com.babeeta.hudee.gateway.app.service.MessageService" 
+          scope="singleton"
+          lazy-init="false">
+        <constructor-arg type="int" value="${message-dev-max-connection}" />
+        <constructor-arg type="String" value="${message-dev-domain}"/>          
+    </bean>
+    
+    <bean id="subscriptionService" 
+          class="com.babeeta.hudee.gateway.app.service.SubscriptionService" 
+          scope="singleton"
+          lazy-init="false">
+        <constructor-arg type="int" value="${subscription-dev-max-connection}" />
+        <constructor-arg type="String" value="${subscription-dev-domain}"/>          
+    </bean>
+    
+    <bean id="shardingService" 
+          class="com.babeeta.hudee.gateway.app.service.ShardingService" 
+          scope="singleton"
+          lazy-init="false">
+        <constructor-arg type="int" value="${sharding.maxThread}" />
+        <constructor-arg type="String" value="${sharding.appGatewayDomain}"/>
+        <constructor-arg type="String" value="${superUser.username}"/>
+        <constructor-arg type="String" value="${superUser.password}"/>         
+    </bean>
+</beans>
