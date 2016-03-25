@@ -52,7 +52,7 @@
      <select name="appName" id="app"  class="inputText130" ><option value="-1">请选择应用</option></select>
     </s:if>
     <s:else>
-    <s:select list="#request.appList" name="appName" id="app" listKey="id" listValue="appName" value="id" headerKey="-1" headerValue="请选择应用" onchange="selects(this.value)" theme="simple" cssClass="inputText130">
+    <s:select list="#request.appList" name="appName" id="app" listKey="id" listValue="appName" value="id" headerKey="-1" headerValue="请选择应用"  theme="simple" cssClass="inputText130">
     
     </s:select>
     </s:else>

@@ -251,20 +251,20 @@
         <module>management</module>
         <module>test-kit</module>
     </modules>
-
+<!--
     <distributionManagement>
         <repository>
             <id>release</id>
             <name>Butterfly Release</name>
-            <url>http://192.168.0.104:8060/content/repositories/releases/</url>
+            <url>http://192.168.1.221:8081/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>snapshots</id>
             <name>Butterfly Snapshot</name>
-            <url>http://192.168.0.104:8060/content/repositories/snapshots/</url>
+            <url>http://192.168.1.221:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
-
+-->
     <build>
         <pluginManagement>
             <plugins>

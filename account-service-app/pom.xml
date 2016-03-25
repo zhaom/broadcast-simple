@@ -128,6 +128,24 @@
                 <groupId>com.googlecode.t7mp</groupId>
                 <artifactId>maven-t7-plugin</artifactId>
             </plugin>
+
+            <!-- jetty插件 -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.11.v20150529</version>
+                <configuration>
+                    <jvmArgs>-Xms128m -Xmx512m -XX:MaxNewSize=128 -XX:MaxPermSize=256m</jvmArgs>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                        <defaultsDescriptor>${basedir}/src/main/resources/webdefault.xml</defaultsDescriptor>
+                    </webApp>
+                    <httpConnector>
+                        <port>8081</port>
+                    </httpConnector>
+                </configuration>
+            </plugin>
         </plugins>
     </build>      
 </project>

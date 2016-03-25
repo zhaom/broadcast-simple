@@ -16,7 +16,7 @@ function selects(obj)
 		success:function(data)
 		{
 			//$("#life").empty();
-			$("#msg_format").empty();
+			//$("#msg_format").empty();
 			//("#life").append("<option name='sel' value='0'>请选择时效</option>");
 			var strs=data.split("/");
 			var str=strs[0].split(",");

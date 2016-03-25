@@ -149,7 +149,7 @@ public class ScheduleServiceImpl implements ScheduleService {
 				long ns = now.getTime();
 				return (ss - ns) / 1000;
 			}
-		}, 2L, 5L, TimeUnit.MINUTES);
+		}, 2L, 5L, TimeUnit.SECONDS);
 	}
 
 	public ScheduleDao<Schedule, String> getScheduleDaoImpl() {
